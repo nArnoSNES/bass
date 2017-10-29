@@ -1,4 +1,4 @@
 build:
-	$(MAKE) -C bass
+	cd bass && make
 clean:
 	- cd bass && make clean

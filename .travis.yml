@@ -1,0 +1,27 @@
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.9
+      env:
+         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+
+before_install:
+    - eval "${MATRIX_EVAL}"
+
+language: c
+
+script: make
+
+deploy:
+  provider: releases
+  api-key:
+    - secure: "Qz6WRpKv/ZALMlZsqO4JVQYXy1NDDDc76gCYHk+zlVd9AKh7fnt3JTuahDUKrsStRSl4m2uS0HA2Mp8RnSYP5kRZoMuALN7xXZA1wKvO1nXpuxXv2V+PFJdZ3JhUMmb6vhnWa0XcTO3tg97G0/e1rP5KrvUw80NGt4Xezc9fgCxnVem/xGalc3w4NuUX6ClkNWzSYfv2sNSfcWs06gT+GxLXEhJks5n/rjrxatOp2v1235BVgrsvv1mM3aUCdYieuVnJmgNK74EmEtC/URnc3/JiRKOSJhTlPQuEPukMSmop0Y/iMsuNeaOclqX9PQjnY791C7RTWdJj2JCbw930o/L2Col1gD4JmK/NgIU/9LhD+c6mUvxzdfILndJDwVWByA6fuKEg+hFLkoIPS2KBIxMqkZ4Cq19pQX3cTVoTv6N8+ddy+MdMAKcgpVy6m0hvuueiV1AR16IDdF8jECERO/pv4iIoJ78C+r3DFWkVgVmjbRtJaw9PppEZwHfJ9AILNn3T94/7WY5Hppprb2qbCJADmweoHNbIZ+qRMmTO2nk5VgHe57cKyuEEuG/drN2Am6C27wHWRRXFQkpzC8yAFoAew0k0DVhukSVQoRnDnFFfSePo6NVPqCxAGa4YOABQV745nTJLswbeOWZBJ7JBfA79+H33hHXg5f9iLemH5hE="
+  file: './bass/out/bass'
+  skip_cleanup: true
+  on:
+tags: true
